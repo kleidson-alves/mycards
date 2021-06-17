@@ -1,10 +1,17 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {useField} from '@unform/core'
 
+import {InputStyle} from './styles'
 
 const Input = ({name, ...rest}) => {
   const {fieldName, registerField, defaultValue, error} = useField(name);
+  const [isFilled, setIsFilled] = useState(false);
+
   const inputRef = useRef();
+
+  const handleInputBlur = useCallback(() => {
+    setIsFilled(!!inputRef.current?.value);
+  }, [])
 
   useEffect(()=> {
     registerField({
@@ -22,7 +29,9 @@ const Input = ({name, ...rest}) => {
     })
   },[fieldName, registerField])
   return(
-    <input
+    <InputStyle
+    isFilled = {isFilled}
+    onBlur={handleInputBlur}
     ref={inputRef}
     type="text"
     {...rest}

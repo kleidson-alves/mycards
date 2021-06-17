@@ -16,13 +16,11 @@ const Home = () => {
   const formRef = useRef(null);
 
   
-  const handleAddCard = useCallback((data, {reset}) => {
+  const handleAddCard = useCallback((data, {reset}, event) => {
      if(data.title && data.description){
-       setCards([...cards, data]);
-
-       reset();
+      setCards([...cards, data]);
+      reset();
      }
-
     
   }, [cards, setCards])
 
