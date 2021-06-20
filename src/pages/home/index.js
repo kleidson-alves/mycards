@@ -31,17 +31,18 @@ const Home = () => {
   }, [])
 
 
-  const handleAddCard = useCallback((data, {reset}, event) => {
+  const handleAddCard = useCallback( async (data, {reset}, event) => {
 
     if(data.title && data.description){  
       data.color = color;
+      data.content = '';
       setCards([ ...cards, data]);
-      save(data);
+      await save(data);
 
       reset();
      }
     
-  }, [cards, setCards])
+  }, [cards, setCards, color])
 
   // Dev Only
 
@@ -54,11 +55,13 @@ const Home = () => {
     <Container>
       <List>
         <h1>Meus estudos</h1>
-        <ul>
-          {cards.map(({title, description, _id, color}, index) => (
-              <Card  key={index} id ={_id} title={title} description={description} userColor={color}/>
-          ))}
-        </ul>
+        <div>
+          <ul>
+            {cards.map((data, index) => (
+              <Card  key={index} data={data}/>
+            ))}
+          </ul>
+        </div>
       </List>
       <ContentForm>
         <Form ref= {formRef} onSubmit={handleAddCard}>

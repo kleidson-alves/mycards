@@ -17,7 +17,6 @@ function createWindow() {
     },
     minHeight:700,
     minWidth:1200,
-    maximizable:true,
   });
 
   mainWindow.loadURL(
@@ -30,7 +29,6 @@ function createWindow() {
 
   mainWindow.setMenuBarVisibility(false);
   
-
   mainWindow.on('closed', () => {
     mainWindow = null;
   });

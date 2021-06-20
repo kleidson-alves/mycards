@@ -9,6 +9,7 @@ export const save = async (card) => {
     title: card.title,
     description: card.description,
     color: card.color,
+    content: card.content,
     created_at: new Date()
   }
   db.put(newCard, (err, response) => {

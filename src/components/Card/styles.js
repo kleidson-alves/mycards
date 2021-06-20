@@ -2,16 +2,14 @@ import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   background: transparent;
-  
-  position: relative;
-  width: 100%;
-  height: 100%;
+  perspective: 100%;
   text-align: center;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  border-radius: 10px;
+  
   transition: transform 0.6s;
   transform-style: preserve-3d;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-
-  border-radius: 10px;
+  
 
   ${props => props.showBack? css`transform: rotateY(180deg);` : css``}
 
@@ -19,33 +17,29 @@ export const Container = styled.div`
 
 export const Content = styled.div`
   border-radius: 10px;
+  height: 150px;
 
+  ${props => css`background-color: ${props.userColor};`}
 
-${props => css`background-color: ${props.userColor};`}
+  ${props => props.userColor !== '#E5E5E5' && css`
+    background-color: ${props.userColor};
+    color: #fff;
 
-${props => props.userColor !== '#E5E5E5' && css`
-  background-color: ${props.userColor};
-  color: #fff;
+    svg{
+      color: #fff
+    }
 
-  svg{
-    color: #fff
-  }
-
-  h2::after{
-  background-color: #fff;
-  width: 40px;
-  height: 2px;
-  margin: 5px auto 15px auto;
-  }
-`}
-
-
+    h2::after{
+    background-color: #fff;
+    width: 40px;
+    height: 2px;
+    margin: 5px auto 15px auto;
+    }
+  `}
 `;
 
 export const ContentFront = styled.div`
-
-  padding: 20px;
-  height: 120px;
+  padding: 40px;
 
   position: relative;
   font-size: 16px;
@@ -94,4 +88,9 @@ export const ContentBack = styled.div`
 
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+
+
+  div {
+    padding: 40px;
+  }
 `;

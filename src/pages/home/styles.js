@@ -4,7 +4,8 @@ export const Container = styled.div`
   display:flex;
   flex: 1;
   flex-direction: row;
-  height: 700px;
+
+  height: 100vh;
 
   h1::after {
     content: "";
@@ -18,42 +19,54 @@ export const Container = styled.div`
   `;
 
 export const List = styled.div`
- 
-  padding: 20px;
+  height: 100%;
+  padding: 10px;
 
   text-align: center;
-
   border-right: 2px solid #000;
 
   ul {
     overflow: auto;
-    scroll-behavior: smooth;
-    
-    max-height: 500px;
+    max-height: 83%;
     margin: 30px 0;
-    
-    padding: 5px;
+    padding: 20px;
 
     display: grid;
     grid-template-columns: 300px 300px;
     list-style-type: none;
     gap: 10px;
 
-
     ::-webkit-scrollbar {
-     width: 10px;
-     border-radius: 3px;
-
+      width: 5px;
     }
 
     ::-webkit-scrollbar-thumb {
-     background-color: #fff;
-     width: 3px;
      border: 2px solid #2F8DF8;
+     background-color: #2F8DF8;
      border-radius: 5px;
+    }
+  }
+
+  @media only screen and (min-width: 1250px){
+
+    ul {    
+    grid-template-columns: 350px 350px;
+    gap: 10px;
     }
 
   }
+
+
+  @media only screen and (min-width: 1550px){
+
+    ul {
+    
+    grid-template-columns: 350px 350px 350px;
+    gap: 20px;
+
+    }
+  }
+
 `;
 
 
