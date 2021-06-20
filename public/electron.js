@@ -15,7 +15,9 @@ function createWindow() {
     webPreferences: {
       nodeIntegration: true,
     },
-    resizable: false,
+    minHeight:700,
+    minWidth:1200,
+    maximizable:true,
   });
 
   mainWindow.loadURL(
@@ -25,6 +27,9 @@ function createWindow() {
   if (isDev) {
     //mainWindow.webContents.openDevTools();
   }
+
+  mainWindow.setMenuBarVisibility(false);
+  
 
   mainWindow.on('closed', () => {
     mainWindow = null;

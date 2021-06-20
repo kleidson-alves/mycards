@@ -1,49 +1,86 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {Form} from '@unform/web'
 import {FiPlusCircle} from 'react-icons/fi'
 
-import {Container, List, Content} from './styles'
+import {save, get, deleteAll} from '../../api'
+ 
+import {Container, List, ContentForm, SelectColor, InputColor} from './styles'
 
-import ItemList from '../../components/ItemList';
+import Card from '../../components/Card';
 import Input from '../../components/Input';
 
 const Home = () => {
-  const [cards, setCards] = useState([
-    {title: 'Paulo', description: 'Estudo sobre como foi a vida de Paulo'}, 
-    {title:'Thiago', description: 'Estudo sobre o livro de Thiago'}, 
-    {title: 'Rute', description:'Exemplo de lealdade'},
-  ]);
-  const formRef = useRef(null);
-
+  const colors = ['#2F8DF8', '#F20505', '#3FBF48', '#F2D022', '#E5E5E5'];
   
+  const [cards, setCards] = useState([]);
+  const [color, setColor] = useState('#E5E5E5');
+  const formRef = useRef();
+
+  useEffect(() => {
+    const giveMeData = async () => {
+
+      const data = await get();
+      setCards(data);
+    }
+
+    giveMeData();
+  }, [cards])
+
+  const handleChangeColor = useCallback((e) => {
+    setColor(e.target.value);
+  }, [])
+
+
   const handleAddCard = useCallback((data, {reset}, event) => {
-     if(data.title && data.description){
-      setCards([...cards, data]);
+
+    if(data.title && data.description){  
+      data.color = color;
+      setCards([ ...cards, data]);
+      save(data);
+
       reset();
      }
     
   }, [cards, setCards])
+
+  // Dev Only
+
+  const handleDeleteAll = useCallback( async () => {
+    await deleteAll();
+    setCards([])
+  }, [])
 
   return(
     <Container>
       <List>
         <h1>Meus estudos</h1>
         <ul>
-          {cards.map(({title, description}, index) => (
-            <ItemList key={index} title={title} description={description}/>
+          {cards.map(({title, description, _id, color}, index) => (
+              <Card  key={index} id ={_id} title={title} description={description} userColor={color}/>
           ))}
         </ul>
       </List>
-      <Content>
+      <ContentForm>
         <Form ref= {formRef} onSubmit={handleAddCard}>
           <h1>Novo Cartão</h1>
           <div>
             <Input name='title'  placeholder="Título"/>
             <Input name='description' placeholder="Descrição"/>
+            <SelectColor onChange={(ev) => {handleChangeColor(ev)}}>
+              <h3>Selecione uma cor para seu cartão</h3>
+              {colors.map(color => (
+              <InputColor thisColor = {color}>
+                {color === '#E5E5E5' ?  <input name="color" type="radio" value={color} defaultChecked/> :
+                 <input name="color" type="radio" value={color}/>
+                }
+              </InputColor>
+                ))}
+            </SelectColor>
           </div>
-          <button><FiPlusCircle size={30}/></button>
+          <button><FiPlusCircle size={35}/></button>
+          {/* <button onClick = {handleDeleteAll}>X</button> */}
         </Form>
-      </Content>
+      </ContentForm>
     </Container>
   );
 }

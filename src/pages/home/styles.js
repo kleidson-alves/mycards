@@ -1,11 +1,10 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   display:flex;
   flex: 1;
   flex-direction: row;
-  height: 670px;
-
+  height: 700px;
 
   h1::after {
     content: "";
@@ -28,20 +27,37 @@ export const List = styled.div`
 
   ul {
     overflow: auto;
+    scroll-behavior: smooth;
+    
     max-height: 500px;
     margin: 30px 0;
     
     padding: 5px;
+
     display: grid;
     grid-template-columns: 300px 300px;
     list-style-type: none;
     gap: 10px;
-  }
 
+
+    ::-webkit-scrollbar {
+     width: 10px;
+     border-radius: 3px;
+
+    }
+
+    ::-webkit-scrollbar-thumb {
+     background-color: #fff;
+     width: 3px;
+     border: 2px solid #2F8DF8;
+     border-radius: 5px;
+    }
+
+  }
 `;
 
 
-export const Content = styled.div`
+export const ContentForm = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -66,7 +82,7 @@ export const Content = styled.div`
     height: 60px;
     
     margin-top: 5px;
-    padding: 15px;
+    padding: 5px 0;
 
     border: none;
     border-radius: 10px;
@@ -75,6 +91,46 @@ export const Content = styled.div`
     color: #fff;
   }
 `;
+
+export const SelectColor = styled.div`
+  text-align: left;
+  margin-top: 20px;
+  
+  h3{
+    margin-bottom: 20px;
+  }
+ 
+`;
+
+
+export const InputColor = styled.div`
+  display: inline-block;
+  margin-top: 5px;
+
+  input {
+    appearance: none; 
+    display: inline-block;
+    margin-left: 30px;
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+    border-radius: 50%;
+    ${props => css`background: ${props.thisColor}`}
+  }
+
+  input:checked {
+    width: 60px;
+    height: 60px;
+  }
+`;
+
+export const OptionColor = styled.input`
+
+
+ 
+`;
+
+
 
 
 
