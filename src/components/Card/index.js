@@ -14,7 +14,8 @@ const Card = ({data}) => {
 
   const handleDeleteCard = useCallback( async (id) => {
     await deleteData(id);
-    setShowBack(false)
+    setShowBack(false);
+    setShowButton(true)
   }, [])
 
   const handleShowDeleteButton = useCallback(() => {

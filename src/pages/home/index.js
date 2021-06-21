@@ -2,7 +2,8 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {Form} from '@unform/web'
 import {FiPlusCircle} from 'react-icons/fi'
 
-import {save, get, deleteAll} from '../../api'
+import {get} from '../../api'
+import { useCard } from '../../hooks/useCard'
  
 import {Container, List, ContentForm, SelectColor, InputColor} from './styles'
 
@@ -14,11 +15,13 @@ const Home = () => {
   
   const [cards, setCards] = useState([]);
   const [color, setColor] = useState('#E5E5E5');
+
   const formRef = useRef();
+
+  const { addCard } = useCard();
 
   useEffect(() => {
     const giveMeData = async () => {
-
       const data = await get();
       setCards(data);
     }
@@ -30,26 +33,23 @@ const Home = () => {
     setColor(e.target.value);
   }, [])
 
-
   const handleAddCard = useCallback( async (data, {reset}, event) => {
-
+    data.color = color;
+    data.content = '';
+    
     if(data.title && data.description){  
-      data.color = color;
-      data.content = '';
-      setCards([ ...cards, data]);
-      await save(data);
-
+      await addCard(data);
       reset();
      }
     
-  }, [cards, setCards, color])
+  }, [color, addCard])
 
   // Dev Only
 
-  const handleDeleteAll = useCallback( async () => {
-    await deleteAll();
-    setCards([])
-  }, [])
+  // const handleDeleteAll = useCallback( async () => {
+  //   await deleteAll();
+  //   setCards([])
+  // }, [])
 
   return(
     <Container>
@@ -81,7 +81,7 @@ const Home = () => {
             </SelectColor>
           </div>
           <button><FiPlusCircle size={35}/></button>
-          {/* <button onClick = {handleDeleteAll}>X</button> */}
+          {/* <button onClick = {handleFindCard}>X</button> */}
         </Form>
       </ContentForm>
     </Container>

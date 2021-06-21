@@ -2,13 +2,17 @@ import React from 'react';
 
 import Home from './pages/home'
 
+import AppProvider from './hooks'
+
 import GlobalStyles from './styles/global'
 
 function App() {
   return (
    <div>
-     <Home/>
-     <GlobalStyles/>
+    <AppProvider>
+      <Home/>
+    </AppProvider>
+    <GlobalStyles/>
    </div>
   );
 }

@@ -14,7 +14,7 @@ export const save = async (card) => {
   }
   db.put(newCard, (err, response) => {
     if(!err){
-      console.log('Card cadastrado');
+      console.log('Card registered');
     }
     else{
       console.log(err);
@@ -36,6 +36,41 @@ export const get = async () => {
       return -1;
     });
   } catch (err) {
+    console.log(err);
+  }
+}
+
+
+export const getOne = async (id) => {
+  try {
+    const response =  await db.allDocs({
+      include_docs: true,
+    });
+
+    return response.rows.map(row => (row.doc)).filter(card => card._id === id)[0];
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+
+export const updateData = async (updatedCard) => {
+  try {
+    const doc = await db.get(updatedCard._id);
+    updatedCard._rev = doc._rev;
+
+    console.log(updatedCard);
+    db.put(updatedCard, (err, response) => {
+      if(!err){
+        console.log('Card updated');
+      }
+      else{
+        console.log(err);
+      }
+    })
+    console.log(doc);
+  }
+  catch(err){
     console.log(err);
   }
 }
