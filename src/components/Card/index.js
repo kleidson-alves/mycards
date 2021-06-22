@@ -1,41 +1,54 @@
 import React, {useState ,useCallback} from 'react';
+import {useHistory} from 'react-router-dom';
 
-import { deleteData } from '../../api'
+import { useCard } from '../../hooks/useCard';
 
 import { FiXCircle} from 'react-icons/fi'
 
 import {Container, Content, ContentFront, Title, ContentBack} from './styles'
 
-const Card = ({data}) => {
+const Card = ({data, onlyRead = false}) => {
 
   const [showButton, setShowButton] = useState(false);
   const [showBack, setShowBack] = useState(false);
   const [timeFlipCard, setTimeFlipCard] = useState();
 
-  const handleDeleteCard = useCallback( async (id) => {
-    await deleteData(id);
+  const { selectCard, deleteCard } = useCard();
+  const  history = useHistory();
+
+  const handleDeleteCard = useCallback( async () => {
+    await deleteCard(data._id);
+  
     setShowBack(false);
-    setShowButton(true)
-  }, [])
+    setShowButton(true);
+  }, [deleteCard, data._id])
 
   const handleShowDeleteButton = useCallback(() => {
     if(!showBack){
       setShowButton(!showButton);
     }
-  }, [showButton, showBack])
+  }, [showButton, showBack]);
 
   const handleFlipCard = useCallback(() => {
-    setShowBack(!showBack);
-    setShowButton(showBack)
-  }, [showBack]);
+    if(!onlyRead){
+      setShowBack(!showBack);
+      setShowButton(showBack);
+    }
+  }, [showBack, onlyRead]);
 
   const automaticFlipCard = useCallback(() => {
     setTimeFlipCard(setTimeout(() => setShowBack(false), 3000 ))
   }, []);
 
+  const handleSelectCard = useCallback(async () => {
+    await selectCard(data._id);
+    history.push('/edit');
+  }, [selectCard,data._id, history]);
+
   return (
     <Container 
     onClick = {handleFlipCard}
+    onDoubleClick = {handleSelectCard}
     showBack = {showBack}
     onMouseLeave = {automaticFlipCard}
     onMouseEnter={() => clearTimeout(timeFlipCard)}
@@ -46,12 +59,14 @@ const Card = ({data}) => {
       onMouseEnter={handleShowDeleteButton}
       onMouseLeave={handleShowDeleteButton}>
       
-        <ContentFront showButton = {showButton}>
+        <ContentFront onlyRead = {onlyRead} showButton = {showButton}>
           <Title>{data.title}</Title>
           <p>{data.description}</p>
-          <button onClick = {() => handleDeleteCard(data._id)}>
+          {!onlyRead &&
+          <button onClick = {handleDeleteCard}>
             <FiXCircle size={25}/>
           </button>
+          }
         </ContentFront>
 
         <ContentBack>

@@ -1,19 +1,20 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 
-import Home from './pages/home'
+import Routes from './routes';
 
-import AppProvider from './hooks'
+import AppProvider from './hooks';
 
-import GlobalStyles from './styles/global'
+import GlobalStyles from './styles/global';
 
 function App() {
   return (
-   <div>
+  <BrowserRouter>
     <AppProvider>
-      <Home/>
+      <Routes/>
     </AppProvider>
     <GlobalStyles/>
-   </div>
+  </BrowserRouter>
   );
 }
 

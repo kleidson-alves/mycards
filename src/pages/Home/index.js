@@ -34,10 +34,11 @@ const Home = () => {
   }, [])
 
   const handleAddCard = useCallback( async (data, {reset}, event) => {
-    data.color = color;
-    data.content = '';
-    
+
     if(data.title && data.description){  
+      data.color = color;
+      data.content = '';
+  
       await addCard(data);
       reset();
      }
@@ -58,7 +59,7 @@ const Home = () => {
         <div>
           <ul>
             {cards.map((data, index) => (
-              <Card  key={index} data={data}/>
+              <Card key={index} data={data}/>
             ))}
           </ul>
         </div>
@@ -71,8 +72,8 @@ const Home = () => {
             <Input name='description' placeholder="Descrição"/>
             <SelectColor onChange={(ev) => {handleChangeColor(ev)}}>
               <h3>Selecione uma cor para seu cartão</h3>
-              {colors.map(color => (
-              <InputColor thisColor = {color}>
+              {colors.map((color, index) => (
+              <InputColor key={ index } thisColor = {color}>
                 {color === '#E5E5E5' ?  <input name="color" type="radio" value={color} defaultChecked/> :
                  <input name="color" type="radio" value={color}/>
                 }

@@ -19,7 +19,6 @@ export const Container = styled.div`
   `;
 
 export const List = styled.div`
-  height: 100%;
   padding: 10px;
 
   text-align: center;
@@ -27,7 +26,8 @@ export const List = styled.div`
 
   ul {
     overflow: auto;
-    max-height: 83%;
+    max-height: 80vh;
+
     margin: 30px 0;
     padding: 20px;
 

@@ -57,6 +57,7 @@ export const ContentFront = styled.div`
     css`visibility: visible;` : css` visibility: hidden `}
     }
 
+
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 
