@@ -1,9 +1,13 @@
 import styled, { css } from 'styled-components';
+import {shade} from 'polished';
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   height: 100vh;
+
+  ${props => css`background: ${shade(0.05, props.cardColor)};`}
+
 `;
 
 export const Header = styled.div`
@@ -20,42 +24,53 @@ svg {
   }
 div{
   border-radius: 0;
+  font-size: 24px;
+  height: 160px;
+  
+}
+
+div h2{
+  font-size: 36px;
 }
 `;
 
-export const EditSection = styled.div`
+export const NoteSection = styled.div`
   margin: 40px auto;
-  width: 100%;
-  display: flex;
-`;
-
-export const NoteList = styled.div`
-  flex: 1;
+  width: 60%;
+  height: 70vh;
+  text-align: center;
+  align-items: center;
 `;
 
 export const Content = styled.div`
-  /* width: 100%;
-  height: 100%; */
 
   border: 1px solid #000 ;
+  height: 100%;
 
   textarea {
+    width: 100%;
+    height: 100%;
     resize: none;
-    height: 250px;
-    padding: 15px;
 
-    font-size: 18px;
+    padding: 40px;
+
+    font-size: 24px;
     color: #fff;
-    
 
-    overflow: auto;
+    border: none;
 
     ${props => css`background-color: ${props.cardColor};`}
     ${props => props.cardColor === "#E5E5E5" && css`color: #000;`}
 
     ::placeholder{
       color: #fff;
+      opacity: 0.7;
       ${props => props.cardColor === "#E5E5E5" && css`color: #000;`}
     }
   }
+`;
+
+
+export const EditSection = styled.div`
+
 `;

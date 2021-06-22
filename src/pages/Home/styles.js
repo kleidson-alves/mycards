@@ -106,6 +106,7 @@ export const ContentForm = styled.div`
 `;
 
 export const SelectColor = styled.div`
+  display: block;
   text-align: left;
   margin-top: 20px;
   
@@ -117,13 +118,11 @@ export const SelectColor = styled.div`
 
 
 export const InputColor = styled.div`
-  display: inline-block;
   margin-top: 5px;
-
+  display: inline-flex;
   input {
     appearance: none; 
-    display: inline-block;
-    margin-left: 30px;
+    margin-left: 40px;
     width: 50px;
     height: 50px;
     border: 1px solid black;

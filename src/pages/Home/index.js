@@ -11,7 +11,7 @@ import Card from '../../components/Card';
 import Input from '../../components/Input';
 
 const Home = () => {
-  const colors = ['#2F8DF8', '#F20505', '#3FBF48', '#F2D022', '#E5E5E5'];
+  const colors = ['#2F8DF8', '#D91E41', '#3FBF48', '#F2D022', '#E5E5E5'];
   
   const [cards, setCards] = useState([]);
   const [color, setColor] = useState('#E5E5E5');
@@ -70,6 +70,7 @@ const Home = () => {
           <div>
             <Input name='title'  placeholder="Título"/>
             <Input name='description' placeholder="Descrição"/>
+            <Input name='info' placeholder="Comentário"/>
             <SelectColor onChange={(ev) => {handleChangeColor(ev)}}>
               <h3>Selecione uma cor para seu cartão</h3>
               {colors.map((color, index) => (

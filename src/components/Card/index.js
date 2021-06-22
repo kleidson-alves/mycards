@@ -47,7 +47,7 @@ const Card = ({data, onlyRead = false}) => {
 
   return (
     <Container 
-    onClick = {handleFlipCard}
+    onContextMenu = {handleFlipCard}
     onDoubleClick = {handleSelectCard}
     showBack = {showBack}
     onMouseLeave = {automaticFlipCard}
