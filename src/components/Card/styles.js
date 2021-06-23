@@ -11,7 +11,7 @@ export const Container = styled.div`
   transform-style: preserve-3d;
   
 
-  ${props => props.showBack? css`transform: rotateY(180deg);` : css``}
+  ${props => props.showBack && css`transform: rotateY(180deg);`}
 
 `;
 
@@ -26,7 +26,7 @@ export const Content = styled.div`
     color: #fff;
 
     svg{
-      color: #fff
+      color: #fff;
     }
 
     h2::after{
@@ -60,7 +60,7 @@ export const ContentFront = styled.div`
     background: transparent;
 
     ${props => props.showButton? 
-    css`visibility: visible;` : css` visibility: hidden `}
+    css`visibility: visible;` : css` visibility: hidden; `}
     }
 
 

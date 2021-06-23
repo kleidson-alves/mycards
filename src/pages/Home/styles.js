@@ -7,6 +7,10 @@ export const Container = styled.div`
 
   height: 100vh;
 
+  h1{
+    text-transform: capitalize;
+  }
+
   h1::after {
     content: "";
     margin: 0 auto;
@@ -16,11 +20,17 @@ export const Container = styled.div`
     background-color: #000;
   }
 
+  @media only screen and (min-width: 1250px){
+
+    h1 {
+     margin-top: 20px;
+    }
+  }
+
   `;
 
 export const List = styled.div`
-  padding: 10px;
-
+  padding: 20px;
   text-align: center;
   border-right: 2px solid #000;
 
@@ -28,7 +38,7 @@ export const List = styled.div`
     overflow: auto;
     max-height: 80vh;
 
-    margin: 30px 0;
+    margin: 40px 0;
     padding: 20px;
 
     display: grid;

@@ -36,7 +36,7 @@ const CardProvider = ({children}) => {
   const updateCard = useCallback(async (updatedCard) => {
     await updateData(updatedCard);
     await selectCard(updatedCard._id);
-  })
+  },[selectCard])
 
   const deleteCard = useCallback(async(cardId) => {
     await deleteData(cardId);

@@ -4,7 +4,7 @@ import { FiInfo } from 'react-icons/fi'
 
 import { InputStyle, Container, Info} from './styles'
 
-const Input = ({name, info, ...rest}) => {
+const Input = ({name, info, hasInfo, ...rest}) => {
   const {fieldName, registerField, defaultValue, error} = useField(name);
   const [isFilled, setIsFilled] = useState(false);
 
@@ -38,10 +38,12 @@ const Input = ({name, info, ...rest}) => {
       type="text"
       {...rest}
       />
+      {hasInfo &&
       <Info>
-        <FiInfo size={30}/>
-        <span>{info}</span>
+      <FiInfo size={30}/>
+      <span>{info}</span>
       </Info>
+      }
     </Container>
   );
 }
