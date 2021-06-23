@@ -87,7 +87,7 @@ export const ContentForm = styled.div`
 
   div{
     flex: 1;
-    margin-top: 40px;
+    margin-top: 30px;
   }
 
   button {
@@ -135,14 +135,3 @@ export const InputColor = styled.div`
     height: 60px;
   }
 `;
-
-export const OptionColor = styled.input`
-
-
- 
-`;
-
-
-
-
-

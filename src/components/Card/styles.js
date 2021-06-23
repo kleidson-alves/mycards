@@ -36,10 +36,16 @@ export const Content = styled.div`
     margin: 5px auto 15px auto;
     }
   `}
+
+  p {
+    text-transform: lowercase;
+  }
 `;
 
 export const ContentFront = styled.div`
   padding: 40px;
+  
+
 
   position: relative;
   font-size: 16px;
@@ -73,7 +79,7 @@ export const Title = styled.h2`
     background-color: #000;
     width: 40px;
     height: 2px;
-    margin: 5px auto 20px auto;
+    margin: 5px auto 10px auto;
   }
 
 `;
@@ -85,6 +91,7 @@ export const ContentBack = styled.div`
   width: 100%;
   height: 100%;
 
+  padding: 5px;
   transform: rotateY(180deg);
 
   -webkit-backface-visibility: hidden;

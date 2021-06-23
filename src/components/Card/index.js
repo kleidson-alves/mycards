@@ -60,18 +60,20 @@ const Card = ({data, onlyRead = false}) => {
       onMouseLeave={handleShowDeleteButton}>
       
         <ContentFront onlyRead = {onlyRead} showButton = {showButton}>
-          <Title>{data.title}</Title>
-          <p>{data.description}</p>
-          {!onlyRead &&
-          <button onClick = {handleDeleteCard}>
-            <FiXCircle size={25}/>
-          </button>
-          }
+          <div>
+            <Title>{data.title}</Title>
+            <p>{data.description}</p>
+            {!onlyRead &&
+            <button onClick = {handleDeleteCard}>
+              <FiXCircle size={25}/>
+            </button>
+            }
+          </div>
         </ContentFront>
 
         <ContentBack>
-         {data.content? 
-          <p>{data.content}</p> : 
+         {data.info? 
+          <p>{data.info}</p> : 
           <div>
             <p>Edite o cartão para adicionar um conteúdo</p>
           </div> }

@@ -1,11 +1,12 @@
 import React, { createContext, useCallback, useContext, useState } from 'react';
 
-import {getOne, save, deleteData} from '../api'
+import {getOne, save, deleteData, updateData} from '../api'
 
 const CardContext = createContext({
   addCard: async () => {},
   selectCard: async () => {},
   deleteCard: async () => {},
+  updateCard: async () => {},
   currentCard: null,
 });
 
@@ -32,6 +33,11 @@ const CardProvider = ({children}) => {
 
   }, []);
 
+  const updateCard = useCallback(async (updatedCard) => {
+    await updateData(updatedCard);
+    await selectCard(updatedCard._id);
+  })
+
   const deleteCard = useCallback(async(cardId) => {
     await deleteData(cardId);
   }, [])
@@ -41,7 +47,8 @@ const CardProvider = ({children}) => {
       currentCard, 
       selectCard, 
       addCard, 
-      deleteCard
+      deleteCard,
+      updateCard
       }}>
       {children}
     </CardContext.Provider>

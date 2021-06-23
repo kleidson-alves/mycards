@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {FiArrowLeft} from 'react-icons/fi';
 
@@ -11,15 +11,28 @@ import Card from '../../components/Card';
 const EditCard = () => {
   const [card, setCard] = useState();
   const [isConfigMode, setIsConfigMode] = useState(false);
-  const [notes, setNotes] = useState(['1', '2', '3', '4', '5']);
+  const [enableSave, setEnableSave] = useState(false);
 
-  const { currentCard } = useCard();
+  const { currentCard, updateCard } = useCard();
 
   const contentRef = useRef();
+
+  const hanldeChangeContent = useCallback((target) => {
+    card.content = target.value;
+    setEnableSave(true);
+    
+  }, [card]);
+
+  const handleSaveContent = useCallback(async () => {
+    await updateCard(card);
+    setEnableSave(false);
+  },[card, updateCard]);
+
 
   useEffect(() => {
     setCard(currentCard);
   }, [currentCard]);
+
   return(
     <>
       {!!card &&
@@ -33,10 +46,15 @@ const EditCard = () => {
         </Header>
       {!isConfigMode? 
       <NoteSection>
-        <Content cardColor = {card.color}>
-            <textarea name="content" id="content" placeholder="Adicione um conteúdo ao seu cartão" defaultValue="Meu nome é Kleidson"></textarea>
+        <Content cardColor = {card.color} enableSave={enableSave} >
+            <textarea ref={contentRef} 
+            onChange = {(ev) => hanldeChangeContent(ev.target)}
+            name="content" 
+            id="content" 
+            placeholder="Adicione um conteúdo ao seu cartão" 
+            defaultValue={card.content}></textarea>
+            <button onClick={handleSaveContent}>Salvar</button>
         </Content>
-      
       </NoteSection> :
       <EditSection>
         

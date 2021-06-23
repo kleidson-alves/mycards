@@ -34,11 +34,10 @@ const Home = () => {
   }, [])
 
   const handleAddCard = useCallback( async (data, {reset}, event) => {
-
-    if(data.title && data.description){  
+    if(data.title && data.description){
       data.color = color;
       data.content = '';
-  
+      
       await addCard(data);
       reset();
      }
@@ -68,9 +67,19 @@ const Home = () => {
         <Form ref= {formRef} onSubmit={handleAddCard}>
           <h1>Novo Cartão</h1>
           <div>
-            <Input name='title'  placeholder="Título"/>
-            <Input name='description' placeholder="Descrição"/>
-            <Input name='info' placeholder="Comentário"/>
+            <Input name='title' 
+            placeholder="Título" 
+            info="Um título para o seu cartão com até 20 caracteres" 
+            maxLength="20"
+            />
+            <Input name='description' 
+            placeholder="Descrição" 
+            info="Uma descrição para o seu cartão com até 80 caracteres" 
+            maxLength="80"/>
+            <Input name='info' 
+            placeholder="Comentário (opcional)" 
+            info="Adicione um breve comentário para o verso de seu cartão" 
+            maxLength="240"/>
             <SelectColor onChange={(ev) => {handleChangeColor(ev)}}>
               <h3>Selecione uma cor para seu cartão</h3>
               {colors.map((color, index) => (

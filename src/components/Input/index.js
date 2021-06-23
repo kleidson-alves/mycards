@@ -1,9 +1,10 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import {useField} from '@unform/core'
+import { useField } from '@unform/core'
+import { FiInfo } from 'react-icons/fi'
 
-import {InputStyle} from './styles'
+import { InputStyle, Container, Info} from './styles'
 
-const Input = ({name, ...rest}) => {
+const Input = ({name, info, ...rest}) => {
   const {fieldName, registerField, defaultValue, error} = useField(name);
   const [isFilled, setIsFilled] = useState(false);
 
@@ -29,13 +30,19 @@ const Input = ({name, ...rest}) => {
     })
   },[fieldName, registerField])
   return(
-    <InputStyle
-    isFilled = {isFilled}
-    onBlur={handleInputBlur}
-    ref={inputRef}
-    type="text"
-    {...rest}
-    />
+    <Container>
+      <InputStyle
+      isFilled = {isFilled}
+      onBlur={handleInputBlur}
+      ref={inputRef}
+      type="text"
+      {...rest}
+      />
+      <Info>
+        <FiInfo size={30}/>
+        <span>{info}</span>
+      </Info>
+    </Container>
   );
 }
 
