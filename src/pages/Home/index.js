@@ -1,21 +1,35 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import {Form} from '@unform/web'
-import {FiPlusCircle} from 'react-icons/fi'
+import { Form } from '@unform/web'
+import { FiPlusCircle, FiCalendar } from 'react-icons/fi';
+import { TiSortAlphabetically } from 'react-icons/ti';
+import { VscSymbolColor } from 'react-icons/vsc'
 
-import {get,deleteAll} from '../../api'
 import { useCard } from '../../hooks/useCard'
  
-import {Container, List, ContentForm, SelectColor, InputColor} from './styles'
+import {
+  Container,
+  List,
+  FiltersContent,
+  FilterItem,
+  ContentForm,
+  SelectColor,
+  InputColor
+} from './styles'
 
 import Card from '../../components/Card';
 import CardForm from '../../components/CardForm';
 
 const Home = () => {
   const colors = ['#2F8DF8', '#D91E41', '#3FBF48', '#F2BE24', '#E5E5E5'];
-  
+  const filters = [
+    {name: "Título", icon: TiSortAlphabetically}, 
+    {name: "Cor", icon: VscSymbolColor}, 
+    {name: "Data", icon: FiCalendar}
+  ];
+
   const [cards, setCards] = useState([]);
   const [color, setColor] = useState('#E5E5E5');
-
+  const [filter, setFilter] = useState('Título');
   const formRef = useRef();
 
   const { addCard } = useCard();
@@ -28,6 +42,12 @@ const Home = () => {
 
     giveMeData();
   }, [cards])
+
+  const handleSelectFilter = (e) => {
+    setFilter(e.target.value);
+  }
+
+
 
   const handleChangeColor = useCallback((e) => {
     setColor(e.target.value);
@@ -48,6 +68,15 @@ const Home = () => {
     <Container>
       <List>
         <h1>Meus Cartões</h1>
+        <FiltersContent onChange= {(ev) => handleSelectFilter(ev)}>
+        {filters.map((fil, index) => 
+            <FilterItem key={ index } isChecked = {fil.name === filter}>
+              <label>{fil.name} {' '}</label>
+              <fil.icon size={20}/>
+              <input type="radio" name="filter" value={fil.name}/>
+            </FilterItem>
+          )}
+        </FiltersContent>
         <div>
           <ul>
             {cards.map((data, index) => (

@@ -22,7 +22,6 @@ const CardProvider = ({children}) => {
   });  
 
   const addCard = useCallback(async (card) => {
-
     await save(card);
   },[])
 
@@ -30,7 +29,6 @@ const CardProvider = ({children}) => {
     const selectedCard = await getOne(cardId);
     localStorage.setItem('@MyCards:currentcard', JSON.stringify(selectedCard));
     setCurrentCard(selectedCard);
-
   }, []);
 
   const updateCard = useCallback(async (updatedCard) => {

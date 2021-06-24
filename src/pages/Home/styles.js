@@ -32,13 +32,17 @@ export const Container = styled.div`
 export const List = styled.div`
   padding: 20px;
   text-align: center;
+  
   border-right: 2px solid #000;
+
+  h1 {
+    margin-bottom: 20px;
+  }
 
   ul {
     overflow: auto;
     max-height: 80vh;
 
-    margin: 40px 0;
     padding: 20px;
 
     display: grid;
@@ -75,6 +79,44 @@ export const List = styled.div`
     gap: 20px;
 
     }
+  }
+
+`;
+
+export const FiltersContent = styled.div`
+  text-align: left;
+  
+`;
+
+export const FilterItem = styled.div`
+  
+  display: inline;
+  margin-left: 40px;
+  position: relative;
+
+  vertical-align: middle;
+  padding: 5px; 
+
+  input {
+    appearance: none;
+    position: absolute;
+    width : calc(100% + 20px);
+    height: 35px;
+    left: -10px;
+    top: -4px;
+    border: 2px solid #E5E5E5;
+
+    border-radius: 15px;
+
+    ${props => props.isChecked && css`border-color: #2F8DF8;`}
+
+    :hover{
+      border-color: #2F8DF8;
+    }
+  }
+
+  svg {
+    ${props => props.isChecked && css`color:#2F8DF8;`}
   }
 
 `;
@@ -118,7 +160,7 @@ export const ContentForm = styled.div`
 export const SelectColor = styled.div`
   display: block;
   text-align: left;
-  margin-top: 20px;
+  margin-top: 40px;
   
   h3{
     margin-bottom: 20px;
