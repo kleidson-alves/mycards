@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import {shade} from 'polished';
 
 export const Container = styled.div`
@@ -92,6 +92,19 @@ export const NoteSection = styled.div`
   
 `;
 
+const appearFromBellow = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+
+  to{
+    opacity: 1;
+    transform: translateY(0px);
+    
+  }
+`;
+
 export const Content = styled.div`  
   height: 100%;
   padding: 40px;
@@ -100,6 +113,7 @@ export const Content = styled.div`
     width: 100%;
     height: 90%;
     resize: none;
+    z-index: 10;
 
     padding: 40px;
     
@@ -111,6 +125,7 @@ export const Content = styled.div`
       font-size: 24px;
     }
 
+    animation: ${appearFromBellow} 1s;
   }
 
   button {
@@ -133,7 +148,6 @@ export const Content = styled.div`
 
 `;
 
-
 export const EditSection = styled.div`
   display: flex;
   flex-direction: column;
@@ -145,13 +159,14 @@ export const EditSection = styled.div`
 
   padding: 40px 40px 0 40px;
 
-  
   border: 2px solid #fff;
+  animation: ${appearFromBellow} 1s;
 
   div{
     flex: 1;
     margin-top: 30px;
     border-color: ${shade(.05, '#fff')};
+
   }
 
   form button{
@@ -187,13 +202,25 @@ export const EditSection = styled.div`
 
 
   @media only screen and (min-width: 1250px){
-      padding-top: 60px;
+      padding-top: 70px;
+      height: 60%;
 
     > button {
       top: 15px;
       left: 20px;
     }
+
+    div {
+      display: block;
+      margin: 40px 0; 
+    }
+
+    form button {
+      margin-top: 80px;
+    }
+
   }
 
+  
 
 `;

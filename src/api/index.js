@@ -1,6 +1,8 @@
 import PouchDB from 'pouchdb';
 import {v4 as uuid} from 'uuid';
- 
+
+
+
 const db = new PouchDB('cards');
 
 export const save = async (card) => {
@@ -25,17 +27,13 @@ export const save = async (card) => {
 }
 
 export const get = async () => {
+  
   try {
     const response =  await db.allDocs({
       include_docs: true,
     });
-
-    return response.rows.map(row => (row.doc)).sort((a,b) => {
-      if (a.title.toUpperCase() > b.title.toUpperCase()) {
-        return 1;
-      }
-      return -1;
-    });
+    const data = response.rows.map(row => (row.doc))
+    return data;
   } catch (err) {
     console.log(err);
   }

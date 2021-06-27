@@ -36,7 +36,7 @@ export const List = styled.div`
   border-right: 2px solid #000;
 
   h1 {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
   }
 
   ul {
@@ -73,6 +73,10 @@ export const List = styled.div`
 
   @media only screen and (min-width: 1550px){
 
+    h1 {
+    margin-bottom: 20px;
+    }
+
     ul {
     
     grid-template-columns: 350px 350px 350px;
@@ -85,7 +89,7 @@ export const List = styled.div`
 
 export const FiltersContent = styled.div`
   text-align: left;
-  
+  margin-bottom: 10px;
 `;
 
 export const FilterItem = styled.div`
@@ -116,6 +120,7 @@ export const FilterItem = styled.div`
   }
 
   svg {
+    display: inline-flex;
     ${props => props.isChecked && css`color:#2F8DF8;`}
   }
 
@@ -172,9 +177,10 @@ export const SelectColor = styled.div`
 export const InputColor = styled.div`
   margin-top: 5px;
   display: inline-flex;
+  padding-left: 35px;
+
   input {
     appearance: none; 
-    margin-left: 40px;
     width: 50px;
     height: 50px;
     border: 1px solid black;
@@ -185,5 +191,22 @@ export const InputColor = styled.div`
   input:checked {
     width: 60px;
     height: 60px;
+  }
+
+
+  @media only screen and (min-width: 1550px){
+    padding-left: 50px;
+
+    input {
+    margin-left: 0px;
+    width: 60px;
+    height: 60px;
+  }
+
+  input:checked {
+    width: 70px;
+    height: 70px;
+  }
+
   }
 `;

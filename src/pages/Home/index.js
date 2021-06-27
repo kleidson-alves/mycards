@@ -5,6 +5,8 @@ import { TiSortAlphabetically } from 'react-icons/ti';
 import { VscSymbolColor } from 'react-icons/vsc'
 
 import { useCard } from '../../hooks/useCard'
+
+import getSortFunction from '../../utils/getSortFunction';
  
 import {
   Container,
@@ -20,7 +22,7 @@ import Card from '../../components/Card';
 import CardForm from '../../components/CardForm';
 
 const Home = () => {
-  const colors = ['#2F8DF8', '#D91E41', '#3FBF48', '#F2BE24', '#E5E5E5'];
+  const colors = ['#2F8DF8', '#3FBF48', '#D91E41', '#E5E5E5', '#F2BE24'];
   const filters = [
     {name: "Título", icon: TiSortAlphabetically}, 
     {name: "Cor", icon: VscSymbolColor}, 
@@ -32,19 +34,21 @@ const Home = () => {
   const [filter, setFilter] = useState('Título');
   const formRef = useRef();
 
-  const { addCard } = useCard();
+  const { addCard, getData } = useCard();
 
   useEffect(() => {
     const giveMeData = async () => {
-      const data = await get();
-      setCards(data);
+      const data = await getData();
+      const orderData = data.sort(getSortFunction(filter));
+      setCards(orderData);
     }
 
     giveMeData();
-  }, [cards])
+  }, [getData, cards, filter]);
 
   const handleSelectFilter = (e) => {
     setFilter(e.target.value);
+    
   }
 
 
